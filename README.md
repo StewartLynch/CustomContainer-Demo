@@ -1,8 +1,8 @@
 # Custom Containers
 
-![mac128](Images/mac128.png) This is the starter project for the video on Custom Containers
+![mac128](Images/mac128.png) This is the completed source code for the video on Custom Containers
 
-Release Date: May 18, 2025
+
 
 If you want to support my work, you can - </br>
 
