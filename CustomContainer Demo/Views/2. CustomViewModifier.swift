@@ -20,7 +20,19 @@ import SwiftUI
 struct CustomViewModifier: View {
     var body: some View {
         NavigationStack {
-            Text("View Modifier Example")
+            VStack{
+                VStack {
+                    Text("Custom Container Example")
+                    Text("Another Text View")
+                }
+                .specialModifier()
+                VStack {
+                    Text("Hello Apple")
+                        .font(.largeTitle)
+                    Link("Apple Website", destination: URL(string: "https://apple.com")!)
+                }
+                .specialModifier(bgColor: .red, fgColor: .yellow, sfSymbol: "applelogo")
+            }
             .navigationTitle("View Modifier")
         }
     }
