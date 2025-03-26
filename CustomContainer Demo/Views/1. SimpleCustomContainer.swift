@@ -20,7 +20,17 @@ import SwiftUI
 struct SimpleCustomContainer: View {
     var body: some View {
         NavigationStack {
-            Text("Custom Container Example")
+            VStack {
+                SpecialContainer {
+                    Text("Custom Container Example")
+                    Text("Another Text View")
+                }
+                SpecialContainer(bgColor: .red, fgColor: .yellow, sfSymbol: "applelogo") {
+                    Text("Hello Apple")
+                        .font(.largeTitle)
+                    Link("Apple Website", destination: URL(string: "https://apple.com")!)
+                }
+            }
             .navigationTitle("Custom Container")
         }
     }
