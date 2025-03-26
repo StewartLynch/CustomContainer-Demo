@@ -38,10 +38,6 @@ struct ActionContainerView: View {
         }
         
     }
-    func clearForm() {
-        name = ""
-        age = nil
-    }
 }
 
 #Preview {
