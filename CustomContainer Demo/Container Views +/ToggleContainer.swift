@@ -1,7 +1,7 @@
 //
 //----------------------------------------------
 // Original project: CustomContainer Demo
-// by  Stewart Lynch on 2025-03-24
+// by  Stewart Lynch on 2025-03-29
 //
 // Follow me on Mastodon: https://iosdev.space/@StewartLynch
 // Follow me on Threads: https://www.threads.net/@stewartlynch
@@ -17,27 +17,30 @@
 
 import SwiftUI
 
-struct CustomViewModifier: View {
+struct ToggleContainer<Content: View>: View {
+    @State private var isExpanded = false
+    let label: String
+    @ViewBuilder let content: Content
     var body: some View {
-        NavigationStack {
-            VStack {
-                VStack {
-                    Text("Custom Container Example")
-                    Text("Another Text View")
-                }
-                .specialViewModifier()
-                VStack {
-                    Text("Hello Apple")
-                        .font(.largeTitle)
-                    Link("Apple Website", destination: URL(string: "https://apple.com")!)
-                }
-                .specialViewModifier(bgColor: .red, fgColor: .yellow, sfSymbol: "applelogo")
+        VStack(alignment: .leading){
+            Toggle(label, isOn: $isExpanded)
+                .font(.headline)
+                .padding(.bottom, 5)
+            if isExpanded {
+                content
+                    .transition(.opacity)
             }
-            .navigationTitle("View Modifier")
         }
+        .padding()
+        .background(Color(.systemGray6))
+        .cornerRadius(10)
+        .animation(.default, value: isExpanded)
     }
 }
 
 #Preview {
-    CustomViewModifier()
+    ToggleContainer(label: "Header") {
+        Text("This is some Text")
+        Text("Here is more text")
+    }
 }

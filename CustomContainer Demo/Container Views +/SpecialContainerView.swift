@@ -1,7 +1,7 @@
 //
 //----------------------------------------------
 // Original project: CustomContainer Demo
-// by  Stewart Lynch on 2025-03-24
+// by  Stewart Lynch on 2025-03-29
 //
 // Follow me on Mastodon: https://iosdev.space/@StewartLynch
 // Follow me on Threads: https://www.threads.net/@stewartlynch
@@ -17,27 +17,30 @@
 
 import SwiftUI
 
-struct CustomViewModifier: View {
+struct SpecialContainerView<Content: View>: View {
+    var bgColor: Color = .blue
+    var fgColor: Color = .white
+    var sfSymbol: String = "star"
+    @ViewBuilder let content: Content
+   
     var body: some View {
-        NavigationStack {
-            VStack {
-                VStack {
-                    Text("Custom Container Example")
-                    Text("Another Text View")
-                }
-                .specialViewModifier()
-                VStack {
-                    Text("Hello Apple")
-                        .font(.largeTitle)
-                    Link("Apple Website", destination: URL(string: "https://apple.com")!)
-                }
-                .specialViewModifier(bgColor: .red, fgColor: .yellow, sfSymbol: "applelogo")
-            }
-            .navigationTitle("View Modifier")
+        VStack {
+            content
+            Image(systemName: sfSymbol)
         }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(bgColor.gradient)
+        )
+        .foregroundStyle(fgColor)
+        .shadow(radius: 5)
     }
 }
 
 #Preview {
-    CustomViewModifier()
+    SpecialContainerView {
+        Text("Sample View")
+        Text("More Text")
+    }
 }

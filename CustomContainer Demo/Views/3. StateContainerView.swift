@@ -21,6 +21,15 @@ struct StateContainerView: View {
     var body: some View {
         NavigationStack{
             VStack(spacing: 20) {
+                ToggleContainer(label: "References") {
+                    VStack {
+                        Text("Reference 1")
+                        Text("Reference 2")
+                        Text("Reference 3")
+                    }
+                    .font(.headline)
+                    .foregroundStyle(.gray)
+                }
                 ScrollView {
                     Text(Constant.someText)
                 }
