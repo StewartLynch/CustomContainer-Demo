@@ -21,7 +21,6 @@ struct ActionContainerView: View {
     @State private var name: String = ""
     @State private var age: Int?
     @State private var formSubmitted = false
-    @State private var status: Status = .empty
     
     var body: some View {
         NavigationStack{
@@ -31,51 +30,13 @@ struct ActionContainerView: View {
                         TextField("name", text: $name)
                         TextField("age", value: $age, format: .number)
                     }
-                    ConfirmableContainerView(status: $status) {
-                        Text("Do you want to proceed?")
-                            .font(.headline)
-                        Text("This action cannot be undone!")
-                            .font(.subheadline)
-                            .foregroundStyle(.gray)
-                    } confirmAction: {
-                        // Perform your submit actions
-                        formSubmitted = true
-                        clearForm()
-                        
-                    } cancelAction: {
-                        clearForm()
-                    }
-
                 } else {
                     Text("✅ Form Submitted")
                 }
             }
             .navigationTitle("Action ContainerView")
         }
-        .onChange(of: name) {
-            updateStatus()
-        }
-        .onChange(of: age) {
-            updateStatus()
-        }
         
-    }
-    func updateStatus() {
-        switch (name.isEmpty, age == nil) {
-        case (true, true):
-            status = .empty
-        case (true, false):
-            status = .incomplete
-        case (false, true):
-            status = .incomplete
-        default:
-            status = .complete
-        }
-    }
-    
-    func clearForm() {
-        name = ""
-        age = nil
     }
 }
 
